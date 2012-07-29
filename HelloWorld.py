@@ -14,6 +14,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
 #setup the fonts
 basicFont = pygame.font.SysFont(None, 48)
@@ -26,7 +27,7 @@ textRect.centery = windowSurface.get_rect().centery
 
 windowSurface.fill(WHITE)
 
-pygame.draw.polygon(windowSurface, GREEN,
+pygame.draw.polygon(windowSurface, RED,
     ((146, 0),
      (291, 106),
      (236, 277),
