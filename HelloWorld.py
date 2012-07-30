@@ -27,23 +27,45 @@ background.fill(WHITE)
 #setup the fonts
 basicFont = pygame.font.SysFont(None, 48)
 
-vector = (1, 1)
-
 #setup the text
-text = basicFont.render('Hello World!', True, WHITE, BLUE)
+text = basicFont.render('Hello!', True, WHITE, BLUE)
 textRect = text.get_rect()
-textRect.centerx = windowSurface.get_rect().centerx
-textRect.centery = windowSurface.get_rect().centery
+textRect.center = windowSurface.get_rect().center
 
 
+#display everything
 def displayEverything():
     windowSurface.blit(background, (0, 0))
     windowSurface.blit(text, textRect)
     pygame.display.update()
 
-#display everything
+#initial display
 displayEverything()
 
+#intial vector
+vector = (1, 1)
+
+
+#moves the Rect and checks for bounds
+def moveStuff():
+    global textRect
+    global vector
+    textRect.move_ip(vector)
+
+    #figure out the size of things
+    hx = textRect.width / 2
+    hy = textRect.height / 2
+    x = textRect.centerx
+    y = textRect.centery
+
+    maxwidth = windowSurface.get_width()
+    maxheight = windowSurface.get_height()
+
+    #check for bounds
+    if x + hx >= maxwidth or x - hx <= 0:
+        vector = (vector[0] * -1, vector[1])
+    if y + hy >= maxheight or y - hy <= 0:
+        vector = (vector[0], vector[1] * -1)
 
 
 #run the game loop
@@ -53,5 +75,5 @@ while True:
             pygame.quit()
             sys.exit()
 
-    textRect = textRect.move(1, 1)
+    moveStuff()
     displayEverything()
