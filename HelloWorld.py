@@ -17,8 +17,17 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+# Fill background
+
+background = pygame.Surface(windowSurface.get_size())
+background = background.convert()
+background.fill(WHITE)
+
+
 #setup the fonts
 basicFont = pygame.font.SysFont(None, 48)
+
+vector = (1, 1)
 
 #setup the text
 text = basicFont.render('Hello World!', True, WHITE, BLUE)
@@ -26,19 +35,16 @@ textRect = text.get_rect()
 textRect.centerx = windowSurface.get_rect().centerx
 textRect.centery = windowSurface.get_rect().centery
 
-windowSurface.fill(WHITE)
 
-pygame.draw.polygon(windowSurface, RED,
-    ((146, 0),
-     (291, 106),
-     (236, 277),
-     (56, 277),
-     (0, 106))
-    )
+def displayEverything():
+    windowSurface.blit(background, (0, 0))
+    windowSurface.blit(text, textRect)
+    pygame.display.update()
 
-windowSurface.blit(text, textRect)
+#display everything
+displayEverything()
 
-pygame.display.update()
+
 
 #run the game loop
 while True:
@@ -46,3 +52,6 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+
+    textRect = textRect.move(1, 1)
+    displayEverything()
