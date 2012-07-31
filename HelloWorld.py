@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import random
 import pygame
 from pygame.locals import *
 
@@ -42,9 +43,14 @@ def displayEverything():
 #initial display
 displayEverything()
 
-#intial vector
-vector = (1, 1)
 
+#intial vector
+def randomVector(n):
+    x = random.randint(-1 * n, n)
+    y = random.randint(-1 * n, n)
+    return (x, y)
+
+vector = randomVector(2)
 
 #moves the Rect and checks for bounds
 def moveStuff():
@@ -74,6 +80,9 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                vector = randomVector(2)
 
     moveStuff()
     displayEverything()
